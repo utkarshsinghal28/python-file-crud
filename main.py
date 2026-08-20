@@ -35,9 +35,15 @@ def updating():
 
 def deleting():
     try:
-        pass
+        name = input("Enter your file Name:- ")
+        path = path(name)
+        if path.exists():
+            path.unlink()
+            print("File removed")
+        else:
+            print("File cant be found")    
     except Exception as err:
-        pass
+        print(f"An error has happend {err}")
 
 
 
@@ -63,4 +69,8 @@ while True:
     reading() if response == 2 else ""
     updating() if response == 3 else ""
     deleting() if response == 4 else "" 
+    if response ==5:
+        break
+
+
 
