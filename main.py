@@ -1,10 +1,9 @@
-import pathlib as path
-import os
+from pathlib import Path as pa
 
 def creating():
     try:
         name = input("Enter your file Name:- ")
-        path = path(name)
+        path = pa(name)
         if not path.exists():
             with open(path,"w") as fs:
                 data = input("what do you want to write:- ")
@@ -17,7 +16,7 @@ def creating():
 def reading():
     try:
         name=input("Enter your file Name:- ")
-        path = path(name)
+        path = pa(name)
         if path.exists():
             with open(path,"r") as fs:
                 print(fs.read())
@@ -28,15 +27,51 @@ def reading():
 
 def updating():
     try:
-        pass
+        name = input("please tell your file name :- ")
+        path = pa(name)
+
+        if path.exists():
+            print("operations ")
+            print("1 . Renaming the file ")
+            print("2 . Appending the content")
+            print("3 . Overwriting the file ")
+
+            choice = int(input("Enter your option :- "))
+
+            if choice == 1:
+                newname = input("tell your new file name:- ")
+                new_path = pa(newname)
+                if not new_path.exists():
+                    path.rename(new_path)
+                    print("renamed successfully ")
+                else:
+                    print("file already exists")
+            
+            elif choice == 2:
+                with open(path,'a') as fs:
+                    data = input("what do you want to append :- ")
+                    fs.write(data)
+                print("successfully appended")
+            
+            elif choice == 3:
+                with open(path , "w") as fs:
+                    data = input("what do you want to overwrite :- ")
+                    fs.write("\n"+data)
+                print("successfully overwrittten")
+            else:
+                print("The option doesnt exit")    
+
+        else:
+            print("The file does'nt exit")
+
     except Exception as err:
-        pass
+        print(f"An error has happened {err}")
 
 
 def deleting():
     try:
         name = input("Enter your file Name:- ")
-        path = path(name)
+        path = pa(name)
         if path.exists():
             path.unlink()
             print("File removed")
@@ -48,12 +83,12 @@ def deleting():
 
 def user():
     try:
-        response = int(input(":- "))
-        print("works")
+        response = int(input("\ntell your response:- "))
         return response
     except Exception as err:
-            print(f"There was a error {err}")
-            return 
+        print(f"There was a error {err}")
+
+
 while True:
     print("press 1 for creating a file")
 
@@ -67,16 +102,18 @@ while True:
     response = user()  
 
 
-    creating() if response == 1 else ""
-
-    reading() if response == 2 else ""
-
-    updating() if response == 3 else ""
-
-    deleting() if response == 4 else "" 
-
-    if response ==5:
+    if response == 1:
+        creating()
+    elif response == 2:
+        reading()
+    elif response == 3:
+        updating()
+    elif response == 4:
+        deleting()
+    elif response == 5:
         break
+    else:
+        print("Invalid option")
 
 
 
