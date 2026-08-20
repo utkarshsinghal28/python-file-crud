@@ -20,7 +20,7 @@ def reading():
         path = path(name)
         if path.exists():
             with open(path,"r") as fs:
-                fs.read(name)
+                print(fs.read())
         else:
             print("The file does'nt exists")
     except Exception as err:
@@ -46,8 +46,6 @@ def deleting():
         print(f"An error has happend {err}")
 
 
-
-
 def user():
     try:
         response = int(input(":- "))
@@ -58,17 +56,25 @@ def user():
             return 
 while True:
     print("press 1 for creating a file")
+
     print("press 2 for reading a file")
+
     print("press 3 for updating a file")
+
     print("press 4 for deleting a file")
+
     print("press 5 to exit")
     response = user()  
 
 
     creating() if response == 1 else ""
+
     reading() if response == 2 else ""
+
     updating() if response == 3 else ""
+
     deleting() if response == 4 else "" 
+
     if response ==5:
         break
 
